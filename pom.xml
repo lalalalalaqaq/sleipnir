@@ -19,8 +19,10 @@
     <maven.compiler.release>17</maven.compiler.release>
 
     <version.java>17</version.java>
-    <version.spring.boot>3.0.13</version.spring.boot>
-    <version.sharding.jdbc>4.1.1</version.sharding.jdbc>
+    <version.mysql-connector-java>8.0.30</version.mysql-connector-java>
+    <version.spring-boot-dependencies>3.0.13</version.spring-boot-dependencies>
+    <version.sharding-jdbc-spring-boot-starter>4.1.1</version.sharding-jdbc-spring-boot-starter>
+    <version.mybatis-spring-boot-starter>3.0.4</version.mybatis-spring-boot-starter>
   </properties>
 
   <dependencyManagement>
@@ -35,14 +37,27 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${version.spring.boot}</version>
+        <version>${version.spring-boot-dependencies}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.shardingsphere</groupId>
         <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-        <version>${version.sharding.jdbc}</version>
+        <version>${version.sharding-jdbc-spring-boot-starter}</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
+      <dependency>
+        <groupId>org.mybatis.spring.boot</groupId>
+        <artifactId>mybatis-spring-boot-starter</artifactId>
+        <version>${version.mybatis-spring-boot-starter}</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${version.mysql-connector-java}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
