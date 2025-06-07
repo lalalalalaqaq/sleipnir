@@ -1,2 +1,0 @@
-USE db0;
-CREATE TABLE IF NOT EXISTS order_2 LIKE order_0;

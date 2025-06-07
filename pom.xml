@@ -20,8 +20,9 @@
 
     <version.java>17</version.java>
     <version.mysql-connector-java>8.0.30</version.mysql-connector-java>
+    <version.shardingsphere-jdbc>5.5.2</version.shardingsphere-jdbc>
+
     <version.spring-boot-dependencies>3.0.13</version.spring-boot-dependencies>
-    <version.sharding-jdbc-spring-boot-starter>4.1.1</version.sharding-jdbc-spring-boot-starter>
     <version.mybatis-spring-boot-starter>3.0.4</version.mybatis-spring-boot-starter>
   </properties>
 
@@ -41,11 +42,13 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.shardingsphere/shardingsphere-jdbc -->
       <dependency>
         <groupId>org.apache.shardingsphere</groupId>
-        <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-        <version>${version.sharding-jdbc-spring-boot-starter}</version>
+        <artifactId>shardingsphere-jdbc</artifactId>
+        <version>${version.shardingsphere-jdbc}</version>
       </dependency>
+
       <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
       <dependency>
         <groupId>org.mybatis.spring.boot</groupId>
@@ -76,8 +79,8 @@
   </dependencies>
 
   <build>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to
-      parent pom) -->
+    <pluginManagement>
+      <!-- lock down plugins versions to avoid using Maven defaults (may be moved toparent pom) -->
       <plugins>
         <!-- clean lifecycle, see
         https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->

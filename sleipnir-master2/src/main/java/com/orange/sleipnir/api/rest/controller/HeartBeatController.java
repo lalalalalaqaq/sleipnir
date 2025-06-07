@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/master2/heartbeat")
 public class HeartBeatController {
-    
+
     @RequestMapping("")
     public Long heartbeat() {
         return System.currentTimeMillis();

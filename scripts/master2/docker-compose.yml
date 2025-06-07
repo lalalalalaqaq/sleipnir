@@ -1,33 +1,42 @@
 version: '3.8'
 
 services:
-  db0:
+  sleipnir-db0:
     image: mysql:8.0
     container_name: sleipnir-db0
     environment:
       MYSQL_ROOT_PASSWORD: odin123
-      MYSQL_DATABASE: db0
+      MYSQL_DATABASE: sleipnir
     volumes:
       - ./db-init/db0:/docker-entrypoint-initdb.d
+      - db0_data:/var/lib/mysql  
     ports:
       - "3306:3306"
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-proot", "-u root"]
+      test: ["CMD", "mysqladmin", "ping", "-u", "root", "--password=$$MYSQL_ROOT_PASSWORD"]
       interval: 5s
       timeout: 10s
       retries: 10
-  db1:
+    restart: unless-stopped  
+
+  sleipnir-db1:
     image: mysql:8.0
     container_name: sleipnir-db1
     environment:
       MYSQL_ROOT_PASSWORD: odin123
-      MYSQL_DATABASE: db1
+      MYSQL_DATABASE: sleipnir
     volumes:
       - ./db-init/db1:/docker-entrypoint-initdb.d
+      - db1_data:/var/lib/mysql 
     ports:
       - "3307:3306"
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-proot", "-u root"]
+      test: ["CMD", "mysqladmin", "ping", "-u", "root", "--password=$$MYSQL_ROOT_PASSWORD"]
       interval: 5s
       timeout: 10s
       retries: 10
+    restart: unless-stopped 
+
+volumes:
+  db0_data: 
+  db1_data: 

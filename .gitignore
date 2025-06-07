@@ -43,3 +43,15 @@ build/
 
 ### test dir###
 /test
+
+
+### private dir ###
+# Sensitive config files
+/src/main/resources/sharding.yaml
+/src/main/resources/application.yml
+/src/main/resources/application-dev.yml
+/src/main/resources/application-prod.yml
+
+# Environment files (optional)
+.env
+.env.local

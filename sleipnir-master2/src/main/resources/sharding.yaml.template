@@ -1,0 +1,64 @@
+props:
+  sql-show: true
+  sql-simple: false
+
+mode:
+  type: Standalone
+  repository:
+    type: JDBC
+
+dataSources:
+  sleipnir_db_0:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://${DB0_HOST:localhost}:${DB0_PORT:3306}/sleipnir?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: ${DB0_USER:root}
+    password: ${DB0_PASSWORD:your_password}
+  sleipnir_db_1:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://${DB1_HOST:localhost}:${DB1_PORT:3307}/sleipnir?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: ${DB1_USER:root}
+    password: ${DB1_PASSWORD:your_password}
+
+rules:
+  - !SHARDING
+    tables:
+      t_order:
+        actualDataNodes: sleipnir_db_${0..1}.t_order_${0..2}
+        tableStrategy: 
+          standard:
+            shardingColumn: account_id
+            shardingAlgorithmName: t_order_account_inline
+        keyGenerateStrategy:
+          column: order_id
+          keyGeneratorName: snowflake
+        auditStrategy:
+          auditorNames:
+            - sharding_key_required_auditor
+          allowHintDisable: true
+    defaultDatabaseStrategy:
+      standard:
+        shardingColumn: user_id
+        shardingAlgorithmName: database_inline
+    defaultTableStrategy:
+      none:
+    shardingAlgorithms:
+      database_inline:
+        type: INLINE
+        props:
+          algorithm-expression: sleipnir_db_${user_id % 2}
+      t_order_inline:
+        type: INLINE
+        props:
+          algorithm-expression: t_order_${order_id % 3}
+      t_order_account_inline:
+        type: INLINE
+        props:
+          algorithm-expression: t_order_${account_id % 3}
+    keyGenerators:
+      snowflake:
+        type: SNOWFLAKE
+    auditors:
+      sharding_key_required_auditor:
+        type: DML_SHARDING_CONDITIONS
