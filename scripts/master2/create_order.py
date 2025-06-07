@@ -1,4 +1,3 @@
-import random
 import requests
 
 # API endpoint
@@ -9,11 +8,15 @@ headers = {
     "Content-Type": "application/json"
 }
 
-# 发送1000次请求
-for i in range(1000):
-    account_id = random.randint(100, 200)
-    user_id = random.randint(100, 200)
+# 构建 100 组固定的 (accountId, userId)
+account_user_pairs = [
+    (100 + i, 2000 + i) for i in range(100)  # 可按需修改起始值
+]
 
+# 发送 1000 次请求，循环使用这 100 组数据
+for i in range(2000):
+    account_id, user_id = account_user_pairs[i % len(account_user_pairs)]
+    
     payload = {
         "accountId": account_id,
         "userId": user_id

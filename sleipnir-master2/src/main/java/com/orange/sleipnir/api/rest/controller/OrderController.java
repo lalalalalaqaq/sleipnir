@@ -42,6 +42,7 @@ public class OrderController {
     @PostMapping("/create")
     public Long createOrder(@RequestBody Order order) {
         orderMapper.insert(order);
+        System.out.println(order);
         return order.getOrderId();
     }
 
