@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  sleipnir-boardcast-db0:
+    image: mysql:8.0
+    container_name: sleipnir-boardcast-db0
+    environment:
+      MYSQL_ROOT_PASSWORD: odin123
+      MYSQL_DATABASE: sleipnir
+    volumes:
+      - ./db-init/db0:/docker-entrypoint-initdb.d
+      - db0_data:/data/mysql/boardcast  
+    ports:
+      - "3308:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-u", "root", "--password=$$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+    restart: unless-stopped  
+
+  sleipnir-boardcast-db1:
+    image: mysql:8.0
+    container_name: sleipnir-boardcast-db1
+    environment:
+      MYSQL_ROOT_PASSWORD: odin123
+      MYSQL_DATABASE: sleipnir
+    volumes:
+      - ./db-init/db1:/docker-entrypoint-initdb.d
+      - db1_data:/data/mysql/boardcast  
+    ports:
+      - "3309:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-u", "root", "--password=$$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+    restart: unless-stopped 
+
+volumes:
+  db0_data: 
+  db1_data: 

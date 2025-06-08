@@ -11,9 +11,3 @@ apt install mysql-client-core-8.0
 export MYSQL_PWD=odin123
 mysql -h 127.0.0.1 -P 3306 -u root db0
 mysql -h 127.0.0.1 -P 3307 -u root db1
-
-
-# stop cmd
-# docker-compose stop
-# kill
-# docker-compose down -v

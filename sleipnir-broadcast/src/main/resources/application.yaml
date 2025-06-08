@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+    url: jdbc:shardingsphere:classpath:sharding.yaml
+mybatis:
+  configuration:
+    mapUnderscoreToCamelCase: true
+# logging:
+#   level:
+#     org:
+#       springframework: DEBUG

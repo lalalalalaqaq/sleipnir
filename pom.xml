@@ -10,6 +10,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>sleipnir-master2</module>
+    <module>sleipnir-broadcast</module>
   </modules>
 
   <name>sleipnir</name>
